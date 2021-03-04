@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+{% block header %}{% include 'Home/_header_index.html.twig' %}{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/stylemypage.css">{% endblock %}
+{% block content %}
+    <div class="search-mobile m-5">
+        <form action="/" method="post" class="d-flex">
+            <label for="cheat-search"></label>
+            <input type="search" class="search-bar" id="cheat-search" name="cheat-search" placeholder="Rechercher">
+            <button class="btn button-loupe"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    {% set startype = "fas fa-star" %}
+    {% if session.user.id == user.id %}
+    <div class="welcome-text text-center font-weight-bold font-italic">
+        Bonjour {{ user.name }},<br>heureux de te retrouver !
+    </div>
+        <hr>
+        <div class="add-post-container">
+        {% if session.user.admin == 1 %}
+            {% include 'MySpace/_addLanguageFormAdmin.html.twig' %}
+        {% endif %}
+            {% include '/Home/_addPostForm.html.twig' %}
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 result-title">
+                    <i class="fas fa-arrow-right"></i>  Mes favoris
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid  gray-frame p5">
+            <div class="row justify-content-center">
+                {% set tableToUse = favorites %}
+                {% include '/Home/postmodel.html.twig' %}
+            </div>
+            <div class="row justify-content-center collapse" id="all-post-by-pop">
+                {% set tableToUse = favorites %}
+                {% include '/Home/postmodel_pop_collapse.html.twig' %}
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 result-title">
+                    <i class="fas fa-arrow-right"></i>  Mes fiches
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid  gray-frame p5">
+            <div class="row justify-content-sm-center">
+                {% set tableToUse = myposts %}
+                {% include '/Home/postmodel.html.twig' %}
+            </div>
+            <div class="row justify-content-center collapse" id="all-post-by-date">
+                {% set tableToUse = myposts %}
+                {% include '/Home/postmodel_recent_collapse.html.twig' %}
+            </div>
+        </div>
+    {% else %}
+        <p>
+        <div class="welcome-text text-center font-weight-bold font-italic">
+        Ca arrive à tous de se perdre... N'hésitez pas à revenir sur  <a href="/"> la page d'accueil </a> pour profiter de notre site.
+        </div></p>
+    {% endif %}
+
+{% endblock %}

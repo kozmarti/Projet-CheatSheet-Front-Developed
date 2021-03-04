@@ -1,0 +1,51 @@
+<div class="modal-content ">
+    <div class="modal-header menu-gray">
+        <h5 class="modal-title" id="loginTitle">Se connecter</h5>
+        <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body menu-white ">
+        <form action="/MySpace/check" method="post">
+            <div class="form-group">
+                <label for="nameLogin">Pseudo</label>
+                <input type="text" name="name" class="form-control" id="nameLogin"
+                       placeholder="Entre ton pseudo">
+                {% if session.nameError is defined %}
+                <small class="text-danger error-msg-text"> {{ session.nameError }} </small>
+                {% endif %}
+                {% if session.nameWrongError is defined %}
+                    <small class="text-danger"> {{ session.nameWrongError }} </small>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="passwordLogin">Mot de passe</label>
+                <input type="password" name="password" class="form-control"
+                       id="passwordLogin" placeholder="Entre ton mot passe">
+                {% if session.passwordError is defined %}
+                <small class="text-danger"> {{ session.passwordError }} </small>
+                {% endif %}
+                {% if session.passwordWrongError is defined %}
+                <small class="text-danger"> {{ session.passwordWrongError }} </small>
+                {% endif %}
+            </div>
+    </div>
+    <div class="menu-white">
+
+
+    <div class="modal-footer ">
+        <button type="button" class="btn btn-change-login" data-toggle="modal"
+                data-target="#registration" id="buttonRegistration"
+                data-dismiss="modal">Cliquez ici pour t'inscrire !
+        </button>
+
+        <button type="submit" id="sendLogin" class="btn btn-login-modal">Se connecter<i class="fas fa-sign-in-alt send-icon"></i></button>
+    </div>
+    </div>
+    </form>
+</div>
+
+
+

@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <button type="button" class="btn btn-add m-5" data-toggle="modal" data-target="#newLanguage">
+                <i class="fas fa-plus"></i>  Ajouter un langage
+            </button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newLanguage" tabindex="-1" role="dialog" aria-labelledby="createLanguageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header menu-gray">
+                <h5 class="modal-title" id="loginTitle">Ajouter un langage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body  menu-white">
+                <form action="/MySpace/addLanguage" method="post" class="newLanguageForm">
+                    <div class="form-group mw-100">
+                        <label for="newLanguageName">Nom</label>
+                        <input type="text" class="form-control" id="newLanguageName" name="newLanguageName"
+                               placeholder="Nom du langage" required>
+                    </div>
+                    <div class="form-group mw-100">
+                        <label for="newLanguageIdentifier">Identifieur</label>
+                        <input type="text" class="form-control" id="newLanguageIdentifier" name="newLanguageIdentifier"
+                               placeholder="Identifieur" required>
+                    </div>
+                    <div class="form-group mw-100">
+                        <label for="newLanguageIcon">Icone</label>
+                        <input type="text" class="form-control" id="newLanguageIcon" name="newLanguageIcon"
+                               placeholder="Exemple de format: 'fab fa-css3'">
+                    </div>
+                    <div class="form-group">
+                        <label for="newLanguageSumbit"></label>
+                        <button type="submit" id="newLanguageSumbit" class="btn btn-add btn-add-inside-modal">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

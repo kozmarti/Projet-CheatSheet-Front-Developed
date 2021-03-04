@@ -1,0 +1,93 @@
+{% extends 'layout.html.twig' %}
+{% block header %}{% include 'Home/_header_index.html.twig' %}{% endblock %}
+{% block content %}
+    <div class="search-mobile m-5">
+        <form action="/" method="post" class="d-flex">
+            <label for="cheat-search"></label>
+            <input type="search" class="search-bar" id="cheat-search" name="cheat-search" placeholder="Rechercher">
+            <button class="btn button-loupe"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    {% if search is empty %}
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 mt-5 search-no-result">
+                    {% if search_without_result %}
+                        Aucun résultat ne correspond à votre recherche, veuillez réessayez un autre mot clé.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid ">
+        <div class="row">
+            <div class="col-6 result-title">
+                <i class="fas fa-arrow-right"></i> Les plus populaires
+            </div>
+        </div>
+        <div class="container-fluid gray-frame p-5">
+            <div class="row justify-content-center">
+                {% set tableToUse = all_posts_by_pop %}
+                {% include '/Home/postmodel.html.twig' %}
+            </div>
+            <div class="d-flex justify-content-center">
+                <button id="extend-button" class="btn btn-post" type="button" data-toggle="collapse"
+                        data-target="#all-post-by-pop"
+                        aria-expanded="false" aria-controls="collapseExample"><span class="font-weight-bold"
+                                                                                    id="plus-most-popular"><i
+                                id="extend-button-icon" class="fas fa-plus"></i></span>
+                </button>
+            </div>
+            <div class="row justify-content-center collapse" id="all-post-by-pop">
+                {% set tableToUse = all_posts_by_pop %}
+                {% include '/Home/postmodel_pop_collapse.html.twig' %}
+            </div>
+        </div>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 result-title">
+                <i class="fas fa-arrow-right"></i> Les plus récents
+            </div>
+            <div class="container-fluid gray-frame p-5">
+                <div class="row justify-content-center">
+                    {% set tableToUse = all_posts_by_date %}
+                    {% include '/Home/postmodel.html.twig' %}
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button id="extend-button2" class="btn btn-post" type="button" data-toggle="collapse"
+                            data-target="#all-post-by-date"
+                            aria-expanded="false" aria-controls="collapseExample"><span class="font-weight-bold"
+                                                                                        id="plus-most-popular"><i
+                                    id="extend-button2-icon" class="fas fa-plus"></i></span>
+                    </button>
+                </div>
+                <div class="row justify-content-center collapse" id="all-post-by-date">
+                    {% set tableToUse = all_posts_by_date %}
+                    {% include '/Home/postmodel_recent_collapse.html.twig' %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if search is not empty %}
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6 result-title">
+                    Résultat de ta recherche : "{{ keyword }}"
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-sm-center">
+                    {% set tableToUse = search %}
+                    {% include '/Home/postmodel.html.twig' %}
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+    </div>
+    </div>
+{% endblock %}
