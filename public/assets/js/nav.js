@@ -1,6 +1,6 @@
 
 /* JS Favorites */
-const stars = document.getElementsByClassName('fa-star');
+const stars = document.getElementsByClassName('fa-heart');
 for (let i = 0 ; i <stars.length; i++) {
     stars[i].addEventListener('click', (event)=>    {
         if (event.target.classList.contains('fas')) {
@@ -41,6 +41,7 @@ for (let i = 0 ; i <like.length; i++) {
         if (event.target.classList.contains('fas')) {
             event.target.classList.replace('fas', 'far');
             number--;
+            console.log("yes");
             popularity[i].innerHTML = number.toString();
         } else {
             event.target.classList.add('fas');

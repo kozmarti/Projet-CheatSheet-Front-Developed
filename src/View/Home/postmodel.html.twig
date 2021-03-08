@@ -9,13 +9,13 @@
 
             {# for index tables #}
             {% if one_post.post_unique_id in fav_array %}
-                {% set startype = "fas fa-star" %}
+                {% set startype = "fas fa-heart" %}
             {% else %}
-                {% set startype = "far fa-star" %}
+                {% set startype = "far fa-heart" %}
             {% endif %}
 
             {% if one_post.post_id in fav_array %}
-                {% set startype = "fas fa-star" %}
+                {% set startype = "fas fa-heart" %}
             {% endif %}
             {# for myspace table #}
             {% set random = random(colors) %}
@@ -53,95 +53,90 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content card">
                         <div class="card-body" style="background-color: {{ random }}">
-                            <div class="container pr-0 pl-0 card-header rounded "
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="container card-header rounded"
                                  style="background-color: {{ random }}">
-                                <div class="row d-flex">
+
+                                <div class="d-flex justify-content-between  m-3">
                                     {% if session.userid %}
-                                        <div class="text-warning col-2 text-left"><i class="{{ startype }} fa-2x"
+                                        <div class="star-color"><i class="{{ startype }}"
                                                                                      data-postid="{{ one_post.post_unique_id }}"
                                                                                      data-userid="{{ session.userid }}"></i>
                                         </div>
                                     {% endif %}
-                                    <div class="col-4 offset-2 text-center handwriting ">{{ one_post.title }} <i class="{{ one_post.icon }} fa-2x"></i></div>
-                                    <div class="text-warning col-2 offset-2 text-right">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                                    <div class="text-center handwriting ">{{ one_post.title }} </div>
+                                    <i class="{{ one_post.icon }} fa-2x"></i>
+
+
                                 </div>
+
+
                             </div>
-                            <div class="container card-header ">
+                            <div class="container">
                                 {{ one_post.content|raw }}
                             </div>
-                            <div class="container m-0 7 ">
-                                <div class="row d-flex align-items-center justify-content-between">
 
 
 
 
-                                    <div class="justify-content-end">
+
+
+                                    <div class="d-flex justify-content-end">
                                         {% if session.userid %}
-                                            <div class="d-inline-block pr-2">
-                                                <div>
-                                                    <i class="far fa-thumbs-up fa-2x text-success {{ likesAndDislikes[postid][0] == 1 ? 'fas' : '' }}"
+
+                                                    <i class="far fa-thumbs-up text-success {{ likesAndDislikes[postid][0] == 1 ? 'fas' : '' }} m-2"
                                                        data-postid="{{ one_post.post_unique_id }}"
                                                        data-userid="{{ session.userid }}">
                                                     </i>
-                                                </div>
-                                            </div>
-                                            <div class="d-inline-block">
-                                                <div>
-                                                    <i class="far fa-thumbs-down fa-2x text-danger {{ likesAndDislikes[postid][1] == 1 ? 'fas' : '' }}"
+
+                                            <div class="badge badge-warning popularity m-2 handwriting">{% if all_popularities[postid] %}{{ all_popularities[postid] }} {% else %} 0 {% endif %}</div>
+
+                                                    <i class="far fa-thumbs-down text-danger {{ likesAndDislikes[postid][1] == 1 ? 'fas' : '' }} m-2"
                                                        data-postid="{{ one_post.post_unique_id }}"
                                                        data-userid="{{ session.userid }}">
                                                     </i>
-                                                </div>
-                                            </div>
+
                                         {% endif %}
                                     </div>
-                                    <!-- <div class="badge badge-warning popularity">{{ all_popularities.postid }}</div> -->
-                                </div>
-                            </div>
+
+
+                            <div class="handwriting"><i class="fa fa-comment" aria-hidden="true"></i> Commentaires</div>
                             {% if session.userid %}
                                 <form class="mt-5" action="/home/index" method="post">
+                                    <div class="d-flex flex-column align-items-center">
                                     <input type="hidden" name="postid" value="{{ one_post.post_unique_id }}">
-                                    <div class="container">
-                                        <div class="row align-items-baseline">
-                                            <div class="col-12 pl-0">
-                                                <textarea name="comment" id="comment" cols="32" rows="3"></textarea>
-                                            </div>
-
-                                            <div class="col-12 mt-2 pr-0">
-                                                <button type="submit" class="btn float-right btn-comment ">Commenter
-                                                </button>
-                                            </div>
-                                        </div>
+                                                <textarea class="bubble" name="comment" id="comment" ></textarea>
+                                                <button type="submit" class="btn btn-login-modal m-2 handwriting">Commenter
+                                               </button>
                                     </div>
                                 </form>
                             {% endif %}
                             <div class="comment-accordion handwriting " id="accordionExample">
-                                <i class="fa fa-comment" aria-hidden="true"></i> Commentaires
+
 
                                 <div class="card-body language-main-list">
-                                    <ul class="ul-comment">
+                                   <div>
                                         {% for comment in all_comments %}
                                             {% if comment.post_id == one_post.post_unique_id %}
 
-                                                <li class="li-comment">
-                                                    <i> Créé par {{ comment.username }}
-                                                        le {{ comment.creation_at|date("d/m/Y") }} :</i></br> <p
-                                                            class="bubble">{{ comment.content }}</p></br>
-                                                </li>
+                                                <div class="li-comment d-flex flex-column m-3">
+                                                    <div class="bubble">{{ comment.content }}</div>
+
+                                                    <div class="align-self-end"> Créé par {{ comment.username }}
+                                                        le {{ comment.creation_at|date("d/m/Y") }}</div>
+                                                </div>
                                             {% endif %}
                                         {% endfor %}
-                                    </ul>
+                                   </div>
                                 </div>
                             </div>
                         </div>
 
 
                             <div class="card-footer text-muted handwriting d-flex justify-content-between" style="background-color: {{ random }}">
-                                <div class="badge badge-warning">{% if all_popularities[postid] %}{{ all_popularities[postid] }} {% else %} 0 {% endif %}</div>
+
                                 <div class="ml-auto"> {{ one_post.creation_at|date ("d/m/Y") }}</div>
                                 {% if session.user["admin"] %}
                                 <a href="/home/deletepost/{{ one_post.post_unique_id }}"><i
