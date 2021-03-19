@@ -78,45 +78,33 @@
                                 {{ one_post.content|raw }}
                             </div>
 
-
-
-
-
-
                                     <div class="d-flex justify-content-end">
                                         {% if session.userid %}
-
-                                                    <i class="far fa-thumbs-up text-success {{ likesAndDislikes[postid][0] == 1 ? 'fas' : '' }} m-2"
+                                                  <i class="far fa-thumbs-up text-success {{ likesAndDislikes[postid][0] == 1 ? 'fas' : '' }} m-2"
                                                        data-postid="{{ one_post.post_unique_id }}"
                                                        data-userid="{{ session.userid }}">
                                                     </i>
-
                                             <div class="badge badge-warning popularity m-2 handwriting">{% if all_popularities[postid] %}{{ all_popularities[postid] }} {% else %} 0 {% endif %}</div>
-
                                                     <i class="far fa-thumbs-down text-danger {{ likesAndDislikes[postid][1] == 1 ? 'fas' : '' }} m-2"
                                                        data-postid="{{ one_post.post_unique_id }}"
                                                        data-userid="{{ session.userid }}">
                                                     </i>
-
                                         {% endif %}
                                     </div>
-
-
-                            <div class="handwriting"><i class="fa fa-comment" aria-hidden="true"></i> Commentaires</div>
+                            <hr>
+                            <div class="handwriting comment-title"><i class="fa fa-comment" aria-hidden="true"></i> Commentaires</div>
                             {% if session.userid %}
-                                <form class="mt-5" action="/home/index" method="post">
+                                <form action="/home/index" method="post">
                                     <div class="d-flex flex-column align-items-center">
                                     <input type="hidden" name="postid" value="{{ one_post.post_unique_id }}">
-                                                <textarea class="bubble" name="comment" id="comment" ></textarea>
+                                                <textarea class="bubble textarea-bubble" name="comment" id="comment" placeholder="..."></textarea>
                                                 <button type="submit" class="btn btn-login-modal m-2 handwriting">Commenter
                                                </button>
                                     </div>
-                                </form>
+                                </form >
                             {% endif %}
                             <div class="comment-accordion handwriting " id="accordionExample">
-
-
-                                <div class="card-body language-main-list">
+                           <div class="card-body language-main-list">
                                    <div>
                                         {% for comment in all_comments %}
                                             {% if comment.post_id == one_post.post_unique_id %}
@@ -133,11 +121,8 @@
                                 </div>
                             </div>
                         </div>
+                           <div class="card-footer text-muted handwriting d-flex justify-content-between" style="background-color: {{ random }}">
 
-
-                            <div class="card-footer text-muted handwriting d-flex justify-content-between" style="background-color: {{ random }}">
-
-                                <div class="ml-auto"> {{ one_post.creation_at|date ("d/m/Y") }}</div>
                                 {% if session.user["admin"] %}
                                 <a href="/home/deletepost/{{ one_post.post_unique_id }}"><i
                                             class="fa fa-trash fa-2x delete-button" aria-hidden="true"></i> </a>
@@ -145,6 +130,7 @@
                                 <a href="/home/deleteUserPost/{{ one_post.post_unique_id }}"><i
                                             class="fa fa-trash fa-2x delete-button" aria-hidden="true"></i> </a>
                             {% endif %}
+                               <div class="ml-auto"> {{ one_post.creation_at|date ("d/m/Y") }}</div>
                         </div>
                     </div>
                 </div>

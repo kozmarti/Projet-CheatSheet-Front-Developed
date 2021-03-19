@@ -410,7 +410,10 @@ footer a:hover {
 }
 
 
-
+.textarea-bubble {
+    border:none;
+    font-size: 12px !important;
+}
 .btn-comment {
     margin-bottom: 29px;
     background-color: var(--secondary-color);
@@ -451,10 +454,7 @@ input:focus {
     padding-left: 0;
 }
 
-.li-comment {
-    list-style-type: none;
-    width: 400px;
-}
+
 
 input:focus {
     outline: none;
@@ -463,21 +463,12 @@ input:focus {
     padding: 0.75rem 1rem;
 }
 
-.comment-section {
-
-}
-
-
-/* test bubble comment */
 .bubble{
 // layout
 position: relative;
-    max-width: 30em;
-
-
+    width: 400px;
     background-color: white;
-
-    padding: 1.125em 1.5em;
+    padding: 10px;
     font-size: 1.25em;
 
     border-radius: 0rem 1rem 1rem 1rem;
@@ -559,16 +550,18 @@ position: relative;
     background-color:transparent;
 }
 
-.modal-footer {
-    background-color: var(--body-color);
-}
-
 .post-footer {
     display:flex;
 }
 .delete-button {
-    margin-left:200px;
+    color: black;
 }
+
+.delete-button:hover {
+    color: dodgerblue;
+}
+
+
 .admin-gif {
     margin-left: auto;
     margin-right: auto;
@@ -601,12 +594,25 @@ position: relative;
 }
 
 @media screen and (max-width: 992px) {
-    .search-desktop{
+    .search-desktop {
         display: none;
     }
-
 }
+@media screen and (max-width: 500px) {
+    .bubble{
+        width: 250px;
+    }
 
+    .li-comment{
+        max-width: 350px;
+    }
+}
+    @media screen and (min-width: 501px) {
+        .li-comment {
+            list-style-type: none;
+            width: 400px;
+        }
+    }
 @media screen and (max-width: 1049px) {
     .align-posts {
         justify-content: center;
@@ -626,9 +632,33 @@ position: relative;
     }
 }
 
-.star-color {
-    color: #FF006E;
+
+@media screen and (max-width: 1400px) {
+    .address-hide-unhide {
+        display:none;
+    }
 }
+
+@media screen and (max-width: 935px) {
+    footer {
+        flex-direction: column;
+    }
+    .footer-logo {
+        flex-direction: row !important;
+    }
+}
+
+
+.star-color:hover {
+    cursor: pointer;
+}
+
+.fa-thumbs-down:hover, .fa-thumbs-up:hover{
+    cursor: pointer;
+}
+    .star-color {
+        color: #FF006E;
+    }
 
 /* Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { ... }

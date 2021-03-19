@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\CommentManager;
 use App\Model\FavoriteManager;
 use App\Model\LanguageManager;
 use App\Model\PostManager;
@@ -56,7 +57,9 @@ class MySpaceController extends AbstractController
 
         $_SESSION['userid'] = $theUser['id'];
 
-
+        $allComments = '';
+        $newComment = new CommentManager();
+        $allComments = $newComment->showComments();
         $this->twig->addGlobal('session', $_SESSION);
 
         $colors = ['#FFADAD','#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF' ];
@@ -71,6 +74,7 @@ class MySpaceController extends AbstractController
             'user' => $theUser,
             'likesAndDislikes' => $likesAndDislikes,
             'all_popularities' => $allPopularities,
+            'all_comments' => $allComments,
             'colors' => $colors,
             'colors2' => $colors2
         ]);
